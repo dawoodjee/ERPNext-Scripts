@@ -1,5 +1,5 @@
 # ERPNext-Scripts
-Various unrelated ERPNext Scripts
+Various unrelated ERPNext Scripts. Push requests (your edits) are welcome!
 
 ## Weighted Barcode
 Weighted Barcode Script allows scanning of scale printed weight barcode into the POS. Replace your pos.js file and customise it according [these instructions](https://discuss.erpnext.com/t/how-can-mange-barcode-for-weighted-items-in-pos/20066/) to suit your barcode format.
