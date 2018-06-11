@@ -396,7 +396,8 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		this.frm = {}
 		this.frm.doc = this.doc
 		this.set_transaction_defaults("Customer");
-		this.frm.doc["allow_user_to_edit_rate"] = this.pos_profile_data["allow_user_to_edit_rate"] ? true : false,
+		this.frm.doc["allow_user_to_edit_rate"] = this.pos_profile_data["allow_user_to_edit_rate"] ? true : false;
+		this.frm.doc["allow_user_to_edit_discount"] = this.pos_profile_data["allow_user_to_edit_discount"] ? true : false;
 		this.wrapper.html(frappe.render_template("pos", this.frm.doc));
 		this.make_search();
 		this.make_customer();
@@ -1134,9 +1135,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 				})
 
 				}
-			}			
-
-
+			}
 
 			return $.grep(this.items_list, function (item) {
 				if (search_status) {
@@ -1294,6 +1293,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		$(this.wrapper).find('.selected-item').empty();
 		if(this.child_doc.length) {
 			this.child_doc[0]["allow_user_to_edit_rate"] = this.pos_profile_data["allow_user_to_edit_rate"] ? true : false,
+			this.child_doc[0]["allow_user_to_edit_discount"] = this.pos_profile_data["allow_user_to_edit_discount"] ? true : false;
 			this.selected_row = $(frappe.render_template("pos_selected_item", this.child_doc[0]))
 			$(this.wrapper).find('.selected-item').html(this.selected_row)
 		}
@@ -1410,8 +1410,8 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			$.each(this.frm.doc["items"] || [], function (i, d) {
 				if (d.item_code == me.items[0].item_code) {
 					caught = true;
-					
-					//d.qty += 1; weight
+					//d.qty += 1;
+
 					if (pesokg) {
         					if (d.qty == undefined){
 					                d.qty = Number(pesokg);
@@ -1457,8 +1457,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		this.child.brand = this.items[0].brand;
 		this.child.description = this.items[0].description || this.items[0].item_name;
 		this.child.discount_percentage = 0.0;
-
-		//this.child.qty = 1; weight
+		//this.child.qty = 1;
 
 		if (pesokg) {
  		       if (this.child.qty == undefined){
@@ -1470,6 +1469,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		}else{
 		        this.child.qty = 1;
 		}
+
 		this.child.item_group = this.items[0].item_group;
 		this.child.cost_center = this.pos_profile_data['cost_center'] || this.items[0].cost_center;
 		this.child.income_account = this.pos_profile_data['income_account'] || this.items[0].income_account;
@@ -1749,7 +1749,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		setInterval(function () {
 			me.freeze_screen = false;
 			me.sync_sales_invoice()
-		}, 60000)
+		}, 180000)
 	},
 
 	sync_sales_invoice: function () {
