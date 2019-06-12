@@ -1,7 +1,7 @@
 frappe.provide("erpnext.pos");
 {% include "erpnext/public/js/controllers/taxes_and_totals.js" %}
 
-//kg weight for barcode weighted items 1
+//weight for barcode weighted items 1
 var pesokg;
 
 frappe.pages['pos'].on_page_load = function (wrapper) {
@@ -1105,7 +1105,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 
 		if (key) {
 
-			//weight 3
+			//weight 2
 			if (key.length == 13){
 				if (key.startsWith('200')){
 				return $.grep(this.item_data, function (item) {
@@ -1411,7 +1411,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 				if (d.item_code == me.items[0].item_code) {
 					caught = true;
 					//d.qty += 1;
-
+					//weight 3
 					if (pesokg) {
         					if (d.qty == undefined){
 					                d.qty = Number(pesokg);
