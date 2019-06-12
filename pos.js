@@ -1,7 +1,7 @@
 frappe.provide("erpnext.pos");
 {% include "erpnext/public/js/controllers/taxes_and_totals.js" %}
 
-//weight for barcode weighted items 1
+//kg weight for barcode weighted items 1
 var pesokg;
 
 frappe.pages['pos'].on_page_load = function (wrapper) {
@@ -1136,6 +1136,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 
 				}
 			}
+			//endif
 
 			return $.grep(this.items_list, function (item) {
 				if (search_status) {
@@ -1411,6 +1412,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 				if (d.item_code == me.items[0].item_code) {
 					caught = true;
 					//d.qty += 1;
+
 					//weight 3
 					if (pesokg) {
         					if (d.qty == undefined){
@@ -1468,7 +1470,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			        pesokg =0;
 		}else{
 		        this.child.qty = 1;
-		}
+}
 
 		this.child.item_group = this.items[0].item_group;
 		this.child.cost_center = this.pos_profile_data['cost_center'] || this.items[0].cost_center;
